@@ -1,22 +1,24 @@
-import 'dart:convert';
-import 'dart:io';
+
+import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutterapp/DynamicBtnManager.dart';
-import 'package:flutterapp/DynamicButton.dart';
-import 'package:flutterapp/FlutterJs.dart';
-import 'package:flutterapp/TestPage.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutterapp/SocketPage.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:audioplayers/audioplayers.dart';
 
-import 'AnimationTest.dart';
+import 'FlowDemo.dart';
+import 'FlutterJs.dart';
 
-void main() {
-  runApp(MyApp());
+
+Future<void> main() async{
+  FlutterError.onError = (FlutterErrorDetails details) async {
+    Zone.current.handleUncaughtError(details.exception, details.stack!);//framework错误
+  };
+  runZoned<Future<Null>>(()async{
+    runApp(MyApp());
+    },onError: (error, stackTrace)  {//应用代码异常
+    print("yyy"+error.toString());
+    print("yyy"+stackTrace.toString());
+  });
 }
 
 class MyApp extends StatefulWidget{
@@ -32,24 +34,16 @@ class MyAppState extends State<MyApp> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      //去掉右上角的debug贴纸
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
+        accentColor: Colors.red, //listView滑动到边缘颜色
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Center(
@@ -58,17 +52,16 @@ class MyAppState extends State<MyApp> {
           width: 250,
           height: 250,
           child: Builder(
-            builder:(contexta){
-              return FlatButton(
+            builder: (con){
+              return TextButton(
                 onPressed: (){
-                  getp();
-//                  Navigator.of(contexta).push(PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation){
-//                    return TestPage();
-//                  }));
+                  Navigator.of(con).push(PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation){
+                    return FlowDemo();
+                  }));
                 },
                 child: Icon(Icons.camera,size: 50,),
               );
-            } ,
+            },
           )
         ),
       ),
@@ -82,7 +75,6 @@ class MyAppState extends State<MyApp> {
       // We didn't ask for permission yet or the permission has been denied before but not permanently.
     }
 
-// You can can also directly ask the permission about its status.
     if (await Permission.location.isRestricted) {
       // The OS restricts access, for example because of parental controls.
       print("2");

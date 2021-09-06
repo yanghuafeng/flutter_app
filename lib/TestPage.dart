@@ -8,13 +8,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterapp/DynamicButton.dart';
+import 'download/DynamicButton.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutterapp/StringParse.dart';
 import 'package:shimmer/shimmer.dart';
 
 
@@ -29,14 +28,6 @@ class TestPageState extends State<TestPage>{
   WebViewController? controller;
   DateTime dateLast = DateTime.now();
   Timer? timer;
-  int count=20;
-  bool autoShutdownFlag = false;
-
-  bool status = false;
-
-  bool re = true;
-
-  String url = "http://192.168.80.94:801/Vroom/SongBanner/voddy?kpm_channel=30010203&companycode=11980&barcode=11198007408651";
 
   @override
   void initState(){

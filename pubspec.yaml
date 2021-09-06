@@ -43,6 +43,8 @@ dev_dependencies:
   webview_flutter: ^2.0.10
   json_serializable: ^4.1.4
   audioplayers: ^0.19.1
+  socket_io_client: ^1.0.1
+  socket_io: ^1.0.0
   permission_handler: ^8.1.4+2
   flutter_screenutil: ^5.0.0+2
   flutter_bloc: ^7.0.1 #状态管理框架

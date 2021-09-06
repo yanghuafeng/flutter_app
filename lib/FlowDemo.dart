@@ -49,9 +49,11 @@ class FlowDemoState extends State<FlowDemo> with SingleTickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    return Flow(
-      delegate: _Delegate(animaton.value),
-      children: sides.map((e) => _buildItem(e)).toList(),
+    return Center(
+      child: Flow(
+        delegate: _Delegate(animaton.value),
+        children: sides.map((e) => _buildItem(e)).toList(),
+      ),
     );
   }
 

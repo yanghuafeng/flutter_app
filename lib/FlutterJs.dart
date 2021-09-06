@@ -7,26 +7,26 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterapp/DynamicButton.dart';
+import 'download/DynamicButton.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutterapp/StringParse.dart';
 
 
-class MyApp1 extends StatefulWidget{
+class FlutterJs extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    return MyApp1State();
+    return FlutterJsState();
   }
 }
 
-class MyApp1State extends State<MyApp1>{
+class FlutterJsState extends State<FlutterJs>{
   late WebViewController controller;
   DateTime dateLast = DateTime.now();
 
-  String url = "http://192.168.80.94:801/Vroom/SongBanner/voddy?kpm_channel=30010203&companycode=11980&barcode=11198007408651";
+  String url = "http://192.168.80.94:801/Vroom/SongBanner/voddy?k"
+      "pm_channel=30010203&companycode=11980&barcode=11198007408651";
 
   @override
   void initState() {
@@ -87,8 +87,11 @@ class MyApp1State extends State<MyApp1>{
   }
 
   _loadHtmlFromAssets() async{
-    //String fileHtmlContents = await rootBundle.loadString("assets/js.html");
-    await controller.loadUrl(url);
+    String fileHtmlContents = await rootBundle.loadString("assets/js.html");
+    await controller.loadUrl(Uri.dataFromString(fileHtmlContents,
+        mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+        .toString()
+    );
   }
 
 
