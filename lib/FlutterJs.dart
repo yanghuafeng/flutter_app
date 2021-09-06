@@ -11,7 +11,6 @@ import 'download/DynamicButton.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class FlutterJs extends StatefulWidget{

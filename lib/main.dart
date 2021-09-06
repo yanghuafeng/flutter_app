@@ -2,11 +2,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutterapp/SocketPage.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'FlowDemo.dart';
-import 'FlutterJs.dart';
+import 'animation/FlowDemo.dart';
 
 
 Future<void> main() async{
@@ -32,6 +30,7 @@ class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    getPermission();
   }
 
 
@@ -68,50 +67,42 @@ class MyAppState extends State<MyApp> {
     );
   }
 
-  getp()async{
+  getPermission()async{
     var status = await Permission.camera.request();
     if (status.isGranted) {
       print("1");
       // We didn't ask for permission yet or the permission has been denied before but not permanently.
     }
-
     if (await Permission.location.isRestricted) {
       // The OS restricts access, for example because of parental controls.
       print("2");
-
     }
-
     if (await Permission.contacts.request().isGranted) {
-    // Either the permission was already granted before or the user just granted it.
-    print("3");
-
+      // Either the permission was already granted before or the user just granted it.
+       print("3");
     }
 
 // You can request multiple permissions at once.
     Map<Permission, PermissionStatus> statuses = await [
-    Permission.location,
-    Permission.storage,
+      Permission.location,
+      Permission.storage,
     ].request();
     print(statuses[Permission.location]);
 
     if (await Permission.locationWhenInUse.serviceStatus.isEnabled) {
-    // Use location.
-    print("4");
-
+      // Use location.
+      print("4");
     }
 
     if (await Permission.speech.isPermanentlyDenied) {
     // The user opted to never again see the permission request dialog for this
     // app. The only way to change the permission's status now is to let the
     // user manually enable it in the system settings.
-    openAppSettings();
-    print("5");
+      print("5");
     }
+    //打开应用设置
     openAppSettings();
-
-
     print("6");
-
     bool isShown = await Permission.contacts.shouldShowRequestRationale;
     print(isShown);
   }

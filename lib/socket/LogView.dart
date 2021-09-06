@@ -5,7 +5,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'ScreenAdaptor.dart';
+import '../ScreenAdaptor.dart';
 
 /**
  * Created by YHF at 14:55 on 2021-09-03.
@@ -22,31 +22,17 @@ class LogView extends StatefulWidget{
 
 class LogViewState extends State<LogView>{
   late WebSocket socket;
-
   List<String> list = [];
   ScrollController controller = new ScrollController();
   StreamSubscription? _streamSubscription;
   @override
   void initState() {
     super.initState();
-    socket = widget.socket;
     if(_streamSubscription!=null){
       _streamSubscription?.cancel();
       _streamSubscription = null;
     }
-    _streamSubscription = socket.listen((event) {
-      list.add(event.toString());
-      if(list.length>3000){
-        list.removeRange(0, 1500);
-      }
-      if(mounted) {
-        setState(() {
-        });
-        Future.delayed(Duration(milliseconds: 100)).then((value) {
-          controller.jumpTo(controller.position.maxScrollExtent);
-        });
-      }
-    });
+    initSocket();
 
   }
 
@@ -82,5 +68,23 @@ class LogViewState extends State<LogView>{
             );
           }),
     );
+  }
+
+  initSocket()async{
+    socket = socket = await WebSocket.connect('ws://' + "192.168.74.86" +
+        ':8090/log');
+    _streamSubscription = socket.listen((event) {
+      list.add(event.toString());
+      if(list.length>3000){
+        list.removeRange(0, 1500);
+      }
+      if(mounted) {
+        setState(() {
+        });
+        Future.delayed(Duration(milliseconds: 100)).then((value) {
+          controller.jumpTo(controller.position.maxScrollExtent);
+        });
+      }
+    });
   }
 }

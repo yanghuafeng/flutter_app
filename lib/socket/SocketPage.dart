@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'ScreenAdaptor.dart';
+import '../ScreenAdaptor.dart';
 
 
 /**
@@ -85,6 +85,11 @@ class SocketPageState extends State<SocketPage>{
       }
     });
 
+  }
+
+  sendMessage(String s){
+    //发送信息
+    socket?.add(s);
   }
 
   uninitServer()async{
