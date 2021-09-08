@@ -32,16 +32,38 @@ class NavigatorUtils {
     });
   }
 
+
   /// 返回
   static void goBack(BuildContext context) {
-    FocusScope.of(context).requestFocus(new FocusNode());
-    Navigator.pop(context);
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
   }
 
   /// 带参数返回
   static void goBackWithParams(BuildContext context, result) {
     FocusScope.of(context).requestFocus(new FocusNode());
     Navigator.pop(context, result);
+  }
+
+  static void goBackTo(BuildContext context, String path) {
+    Navigator.popUntil(context, ModalRoute.withName(path));
+  }
+
+  static popRoot(BuildContext context) {
+    if (Navigator.canPop(context)) {
+      Navigator.popUntil(context, (route) {
+        return route.isFirst;
+      });
+    }
+  }
+
+  static popToHome(BuildContext context) {
+    if (Navigator.canPop(context)) {
+      Navigator.popUntil(context, (route) {
+        return route.settings.name!.contains("/home");
+      });
+    }
   }
 
 }
