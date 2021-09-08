@@ -30,9 +30,13 @@ dependencies:
   json_annotation: ^4.0.1
   flutter_downloader: ^1.6.1
   path_provider: ^2.0.2
-  webview_flutter: ^2.0.10
+  webview_flutter: ^2.0.4
   shimmer: ^2.0.0
   permission_handler: ^8.1.4+2
+  confetti: ^0.5.5 #五彩纸屑
+  #model_viewer: ^0.8.1 #3d
+  babylonjs_viewer: ^1.1.0 #3d
+  fluro: ^1.5.1
 
 
 dev_dependencies:
@@ -56,6 +60,7 @@ flutter:
   assets:
     - assets/js.html
     - assets/df.mp3
+    - assets/glb/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
