@@ -1,6 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/Home.dart';
+import 'package:flutterapp/HomePage.dart';
 import 'package:flutterapp/route/AnimationRouter.dart';
 
 import 'IRouterProvider.dart';

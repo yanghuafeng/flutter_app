@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/Home.dart';
+import 'package:flutterapp/HomePage.dart';
 import 'package:flutterapp/TestPage.dart';
 import 'package:flutterapp/animation/ConfettiAni.dart';
 import 'package:flutterapp/route/AnimationRouter.dart';
@@ -26,6 +26,8 @@ Future<void> main() async{
     print("yyy"+stackTrace.toString());
   });
 }
+
+final EaseObserver observer = EaseObserver();
 
 class MyApp extends StatefulWidget{
   @override
@@ -61,6 +63,7 @@ class MyAppState extends State<MyApp> {
         accentColor: Colors.red, //listView滑动到边缘颜色
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      navigatorObservers: [observer],
       home: Scaffold(
         body: HomePage(),
       ),
@@ -107,6 +110,42 @@ class MyAppState extends State<MyApp> {
     print(isShown);
   }
 }
+
+class EaseObserver extends NavigatorObserver {
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    // 当调用Navigator.push时回调
+    super.didPush(route, previousRoute);
+    //可通过route.settings获取路由相关内容
+    //route.currentResult获取返回内容
+    //....等等
+    if (route.settings.name != null) {
+      print('did push' + route.settings.name!);
+    }
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    super.didPop(route, previousRoute);
+    if (previousRoute!.settings.name != null &&
+        previousRoute.settings.name == '/home') {
+    }
+    if (route.settings.name != null &&
+        route.settings.name!.contains("/home?")) {
+
+    }
+    if (route.settings.name != null &&
+        route.settings.name!.contains("/order/menu")) {
+    }
+  }
+
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    // Log.d('did pop' + route.settings.name,tag: this.toString());
+  }
+}
+
 
 
 
