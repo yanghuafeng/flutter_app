@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/route/AnimationRouter.dart';
 import 'package:flutterapp/route/NavigatorUtils.dart';
 
+import 'HandWrittenBoard.dart';
+
 class HomePage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -15,6 +17,8 @@ class HomePage extends StatefulWidget{
 }
 
 class HomePageState extends State<HomePage>{
+
+
   @override
   void initState(){
     super.initState();
@@ -24,19 +28,20 @@ class HomePageState extends State<HomePage>{
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        child: TextButton(
-          onPressed: (){
-            NavigatorUtils.push(context, AnimationRouter.FlowPage);
-          },
-          child: Container(
-            color: Colors.red,
-            width: 50,
-            height: 50,
+        width: 500,
+        height: 500,
+        child: Center(
+          child: TextButton(
+            onPressed: (){
+            },
+            child: SizedBox(),
           ),
         ),
       )
     );
   }
+
+
 
 }
 
