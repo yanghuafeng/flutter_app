@@ -2,6 +2,7 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterapp/HomePage.dart';
 import 'package:flutterapp/route/AnimationRouter.dart';
+import 'package:flutterapp/route/ProviderRouter.dart';
 
 import 'IRouterProvider.dart';
 
@@ -31,6 +32,8 @@ class MainRouter {
     _listRouter.clear();
     /// 各自路由由各自模块管理，统一在此添加初始化
     _listRouter.add(AnimationRouter());
+    _listRouter.add(ProviderRouter());
+
 
     /// 初始化路由 循环遍历取出每个子router进行初始化操作
     _listRouter.forEach((routerProvider){

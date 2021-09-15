@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/route/AnimationRouter.dart';
 import 'package:flutterapp/route/NavigatorUtils.dart';
+import 'package:flutterapp/route/ProviderRouter.dart';
 
 import 'HandWrittenBoard.dart';
 
@@ -33,8 +34,12 @@ class HomePageState extends State<HomePage>{
         child: Center(
           child: TextButton(
             onPressed: (){
+              NavigatorUtils.push(context,
+                  "${ProviderRouter.wholeProvider}?href=fff&&dataId=24");
             },
-            child: SizedBox(),
+            child:Container(
+              color: Colors.red,
+            ),
           ),
         ),
       )

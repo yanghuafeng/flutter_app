@@ -37,6 +37,8 @@ dependencies:
   #model_viewer: ^0.8.1 #3d
   babylonjs_viewer: ^1.1.0 #3d
   fluro: ^1.5.1
+  consumer: ^2.2.0
+  provider: ^5.0.0
 
 
 dev_dependencies:
