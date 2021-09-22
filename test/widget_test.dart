@@ -22,6 +22,10 @@ void main() {
     // Tap the '+' icon and trigger a frame.
     await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
+    // 测试滑动
+    await tester.drag(find.byType(Dismissible), Offset(500.0, 0.0));
+    // 页面会一直刷新，直到最后一帧绘制完成
+    await tester.pumpAndSettle();
 
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
