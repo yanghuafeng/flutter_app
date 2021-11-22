@@ -89,7 +89,7 @@ class _Delegate extends FlowDelegate {
       var offsetY = (radius - cSizeY)*rad * sin(i * perRad+ rad*pi*10) + radius;
       context.paintChild(i,
           transform: Matrix4.translationValues(
-              offsetX - cSizeX, offsetY - cSizeY, 0.0));
+              offsetX - cSizeX, offsetY - cSizeY, 0.0) );
     }
   }
 

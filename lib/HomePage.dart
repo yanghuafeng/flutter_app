@@ -3,10 +3,18 @@
  */
 
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutterapp/TestPage.dart';
+import 'package:flutterapp/carousel/CardItem.dart';
+import 'package:flutterapp/personalWidget/ChessBoard.dart';
+import 'package:flutterapp/personalWidget/RenderboxExam.dart';
 import 'package:flutterapp/route/AnimationRouter.dart';
 import 'package:flutterapp/route/NavigatorUtils.dart';
 import 'package:flutterapp/route/ProviderRouter.dart';
+import 'package:vector_math/vector_math_64.dart' as v;
+
 
 import 'HandWrittenBoard.dart';
 
@@ -17,36 +25,44 @@ class HomePage extends StatefulWidget{
   }
 }
 
-class HomePageState extends State<HomePage>{
+class HomePageState extends State<HomePage>with SingleTickerProviderStateMixin{
 
-
+  late AnimationController controller;
+  late Animation animation;
   @override
   void initState(){
     super.initState();
+    controller = AnimationController(vsync: this,duration: Duration(seconds: 10),);
+    controller.addStatusListener((status) {
+      if(status == AnimationStatus.completed){
+        controller.reverse();
+      }else if(status == AnimationStatus.dismissed){
+        controller.forward();
+      }
+    });
+    animation = Tween<double>(begin: 0,end: 6*pi).animate(CurvedAnimation(parent: controller, curve: Curves.ease));
+    controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        width: 500,
-        height: 500,
-        child: Center(
-          child: TextButton(
-            onPressed: (){
-              NavigatorUtils.push(context,
-                  "${ProviderRouter.wholeProvider}?href=fff&&dataId=24");
-            },
-            child:Container(
-              color: Colors.red,
-            ),
-          ),
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedBuilder(
+          animation: animation,
+          builder: (BuildContext context,Widget? child) {
+            return Container(
+              width: 200,
+              height: 200,
+            );
+          }
+      )
+        ],
       )
     );
   }
-
-
 
 }
 

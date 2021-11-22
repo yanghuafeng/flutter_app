@@ -32,10 +32,10 @@ dependencies:
   webview_flutter: ^2.0.4
   shimmer: ^2.0.0
   permission_handler: ^8.1.4+2
-  confetti: ^0.5.5 #五彩纸屑
+  confetti: ^0.6.0 #五彩纸屑
   #model_viewer: ^0.8.1 #3d
   babylonjs_viewer: ^1.1.0 #3d
-  fluro: ^1.5.1
+  fluro: ^2.0.3
   consumer: ^2.2.0
   provider: ^5.0.0
   dio: ^4.0.0
@@ -66,6 +66,7 @@ flutter:
     - assets/js.html
     - assets/df.mp3
     - assets/glb/
+    - assets/images/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

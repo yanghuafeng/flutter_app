@@ -6,7 +6,6 @@ import 'dart:async';
 import 'package:babylonjs_viewer/babylonjs_viewer.dart';
 import 'package:flutter/material.dart';
 
-
 /* android 9+ need
 <application
     android：name =“ io.flutter.app.FlutterApplication”
@@ -45,16 +44,7 @@ class TestPageState extends State<TestPage>{
                 width: 1280,
                 height: 720,
                 color: Colors.red,
-                child:  Container(
-                  margin: EdgeInsets.all(20.0),
-                  width: 200,
-                  height: 200,
-                  child:
-                  BabylonJSViewer(
-                    src: 'assets/glb/structure.glb',
-                  )
-                ),
-              ),
+              )
             ],
           ),
         ),

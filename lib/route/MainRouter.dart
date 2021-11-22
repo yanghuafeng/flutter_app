@@ -20,12 +20,12 @@ class MainRouter {
 
     /// 指定路由跳转错误返回页
     router.notFoundHandler = Handler(
-        handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
           return Container(child: Text("未找到目标页"),);
         });
 
     router.define(home, handler: Handler(
-        handlerFunc: (BuildContext context, Map<String, List<String>> params) => HomePage()));
+        handlerFunc: (BuildContext? context, Map<String, List<String>> params) => HomePage()));
 
 
     //每次初始化前 先清除集合 以免重复添加
