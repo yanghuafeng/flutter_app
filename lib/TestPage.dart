@@ -1,58 +1,77 @@
-import 'dart:async';
-/**
- * Created by YHF at 14:55 on 2021-05-31.
- */
 
-import 'package:babylonjs_viewer/babylonjs_viewer.dart';
+import 'package:consumer/consumer.dart';
 import 'package:flutter/material.dart';
 
-/* android 9+ need
-<application
-    android：name =“ io.flutter.app.FlutterApplication”
-    android：label =“ flutter_model_viewer_demo”
-    android：icon =“ @ mipmap / ic_launcher”
-    android：usesCleartextTraffic =“ true”>
+/**
+ * Created by YHF at 17:32 on 2021-12-17.
  */
 
-class TestPage extends StatefulWidget{
-  @override
-  State<StatefulWidget> createState() {
-    return TestPageState();
-  }
+var consumer = new Consumer(PlayStatus());
+class PlayStatus{
+  String? singerPic;
+  String? songName;
+  String? singerName;
+  bool? play;
+  bool? ori;
+  bool? mute;
+  int? num;
 }
 
-class TestPageState extends State<TestPage>{
+class PersonalControlBar extends StatefulWidget{
   @override
-  void initState(){
+  State<PersonalControlBar> createState() => _PersonalControlBarState();
+}
+
+String path = "assets/images/";
+class _PersonalControlBarState extends State<PersonalControlBar> with SingleTickerProviderStateMixin{
+
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    // TODO: implement initState
     super.initState();
+    controller = new AnimationController(vsync: this,duration: Duration(seconds: 2));
   }
 
+  bool re = false;
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.black,
-        alignment: Alignment.center,
+    return Container(
+      width: 800,
+      height: 100,
+      child:  TextButton(
+        onPressed: (){
+          controller.stop();
+        },
         child: Container(
-          width: 1280,
-          height: 720,
-          child: Stack(
-            children: [
-              Container(
-                width: 1280,
-                height: 720,
-                color: Colors.red,
-              )
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(5,5),
+                blurRadius: 10, //阴影范围
+                spreadRadius: 1, //阴影浓度
+                color: Colors.black, //阴影颜色
+              ),
             ],
           ),
-        ),
+          width:100,
+          height: 100,
+          child: RotationTransition(
+            turns: controller,
+            child: ClipOval(
+              child: Container(
+                width: 100,
+                height: 100,
+                child: Image.asset(path+"control/cd_default.png",
+                  fit: BoxFit.fill,),
+              ),
+            ),
+          )
+          ),
       ),
-    );
+      );
   }
-
 }
-
-
 

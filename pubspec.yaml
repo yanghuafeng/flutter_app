@@ -36,6 +36,8 @@ dependencies:
   #model_viewer: ^0.8.1 #3d
   babylonjs_viewer: ^1.1.0 #3d
   fluro: ^2.0.3
+  flutter_balloon_slider: ^0.1.1
+  flutter_swiper_null_safety: ^1.0.2
   consumer: ^2.2.0
   provider: ^5.0.0
   dio: ^4.0.0
@@ -67,6 +69,7 @@ flutter:
     - assets/df.mp3
     - assets/glb/
     - assets/images/
+    - assets/images/control/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
